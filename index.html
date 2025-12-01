@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>FastFood — Menyu</title>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#ff6b01">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">FastFood</div>
+    <div class="actions">
+      <button id="toggleTheme" aria-label="Toggle dark mode">🌙</button>
+      <button id="cartBtn" class="cart-btn" aria-label="Savatcha">🛒 <span id="cartCount" class="badge">0</span></button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-left">
+          <h1 class="hero-title">Tez va mazali — FastFood</h1>
+          <p class="hero-sub">Tez yetkazib berish yoki olinib ketish. Eng yoqimli taomlar bir necha daqiqada.</p>
+          <div class="search-row">
+            <input id="search" placeholder="Mahsulotni qidirish...">
+            <select id="categoryFilter">
+              <option value="">Barcha kategoriyalar</option>
+            </select>
+          </div>
+        </div>
+        <div class="hero-right" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- Bottom-tab layout: Menu, Savat, Admin, Kuryer -->
+    <section id="viewMenu" class="view active">
+      <div id="products" class="products" aria-live="polite">
+        <!-- Skeleton / mahsulotlar bu yerda yuklanadi -->
+        <div class="skeleton-grid" id="skeleton">
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="viewCart" class="view hidden">
+      <div class="cart-panel">
+        <h3>Savatcha</h3>
+        <div id="cartItems"></div>
+        <div class="cart-footer">
+          <div>Jami: <strong id="cartTotal">$0.00</strong></div>
+          <button id="checkoutBtn" class="btn primary">Buyurtma berish</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="viewAdmin" class="view hidden">
+      <div class="admin-panel">
+        <h2>Admin Panel</h2>
+        <div id="adminContent">
+          <p>Admin xizmatlari bu yerda ko'rsatiladi: buyurtmalar, hisobotlar, mahsulotlarni boshqarish, va h.k.</p>
+          <div id="ordersList" style="margin-top: 20px;">
+            <h3>Buyurtmalar</h3>
+            <div id="adminOrders"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="viewCourier" class="view hidden">
+      <div class="courier-panel">
+        <h2>Kuryer Panel</h2>
+        <div id="courierContent">
+          <p>Kuryer uchun buyurtmalar va yetkazib berish ma'lumotlari bu yerda ko'rsatiladi.</p>
+          <div id="deliveryList" style="margin-top: 20px;">
+            <h3>Yetkazib berish buyurtmalari</h3>
+            <div id="courierDeliveries"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="emptyCartToast" class="toast hidden">Savatcha bo'sh</div>
+
+    <!-- Checkout modal (soddalashtirilgan) -->
+    <div id="checkoutModal" class="modal hidden">
+      <div class="modal-inner">
+        <h3>Buyurtma yuborish</h3>
+        <label>Telefon raqami</label>
+        <input id="checkoutPhone" placeholder="+998901234567">
+        <label>Manzil (yoki joylashuv yuborish)</label>
+        <input id="checkoutAddress" placeholder="Ko'cha, uy, kvartira">
+        <label>Chek rasm yuklash (ixtiyoriy)</label>
+        <input id="receiptFile" type="file" accept="image/*">
+        <div class="row between">
+          <button id="sendLocationBtn" class="btn">Joylashuvni yuborish</button>
+          <button id="sendOrderBtn" class="btn primary">Yuborish</button>
+        </div>
+        <button id="closeCheckout" class="btn ghost">Bekor qilish</button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Bottom navigation (mobile-first) -->
+  <nav class="bottom-nav" role="navigation" aria-label="Site navigation">
+    <button id="navMenu" class="nav-btn active">📱 Menyu</button>
+    <button id="navCart" class="nav-btn">🛒 Savat <span id="bottomCartCount" class="badge">0</span></button>
+    <button id="navAdmin" class="nav-btn hidden">👨‍💼 Admin</button>
+    <button id="navCourier" class="nav-btn hidden">🚚 Kuryer</button>
+  </nav>
+
+  <script>window.BACKEND_URL = 'https://botuchun80.github.io/fastfood/';</script>
+  <script src="app.js"></script>
+</body>
+</html>
